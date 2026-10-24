@@ -1,0 +1,288 @@
+{
+  "frontendTags": [
+    "前端", "前端场景", "前端手写代码", "前端工程化", "前端性能优化", "前端安全",
+    "HTML", "HTML5", "CSS", "CSS3", "JavaScript", "TypeScript", "ES6", "JSON",
+    "作用域", "原型", "闭包", "对象", "数据类型", "异步编程", "Promise", "正则表达式", "布局",
+    "React", "React基础", "React进阶", "React原理", "React状态管理", "React工具",
+    "React组件库", "React库", "React Hooks", "React Router", "React Native", "React Native 基础",
+    "Vue", "Vue基础", "Vue进阶", "Vue库", "Vue Router", "Vuex", "Vue3", "Vue原理", "Vue工具", "Vue组件库",
+    "Redux", "MobX", "Pinia", "状态管理", "Next.js", "Nuxt",
+    "Next.js 基础", "Next.js 路由", "Next.js SSR", "Next.js SSG", "Next.js ISR",
+    "Next.js 渲染策略", "Next.js 数据获取", "Next.js Server Components",
+    "Next.js App Router", "Next.js 缓存", "Next.js 部署", "Next.js API",
+    "Node.js", "Node框架", "Express", "Koa", "npm", "umi-request",
+    "工程化", "Webpack", "Vite", "Babel", "单元测试", "Monorepo", "pnpm", "yarn",
+    "前端包管理", "前端脚手架", "前端模块化", "前端兼容性", "前端部署", "前端系统设计", "前端库",
+    "计算机网络", "网络协议", "网络", "网络基础", "HTTP", "HTTPS", "DNS", "代理", "CDN",
+    "WebSocket", "Socket", "SSE", "浏览器", "渲染机制", "事件", "缓存",
+    "网络安全", "网站安全", "前端安全", "密码学", "安全开发", "安全", "渗透测试", "认证",
+    "XSS", "CSRF", "XSS 攻击", "CSRF 攻击", "JWT", "OAuth 2.0", "密码存储", "密码加盐",
+    "Echarts", "可视化", "数据可视化", "Canvas", "SVG", "WebAssembly", "GraphQL", "Three.js", "游戏开发",
+    "Flutter", "Electron", "移动端适配", "响应式", "响应式开发", "小程序", "跨端", "uni-app", "Taro",
+    "H5 移动端开发", "H5 基础", "H5 适配", "H5 布局", "H5 触摸事件", "H5 性能优化",
+    "H5 兼容性", "H5 混合开发", "H5 框架",
+    "设计模式", "架构", "架构设计", "架构延伸", "微前端", "组件设计", "组件", "组件声明", "组件通信",
+    "数据结构", "算法", "链表", "树", "图", "堆", "栈", "队列", "DFS", "BFS", "动态规划",
+    "贪心", "双指针", "位运算", "回溯", "字符串", "前缀和", "Trie", "并查集",
+    "Git", "Git 操作", "Git 进阶", "Git 协作应用", "Git基础", "Git概念", "Git操作",
+    "ESLint", "Husky", "Sass", "Gulp", "Grunt", "Umi", "Ant Design Pro", "编码规范", "基础理论",
+    "计算机基础", "UI/UX", "调试", "Vue CLI", "构建工具", "依赖管理", "版本控制", "打包发布",
+    "多环境", "国际化", "CI/CD", "serverless", "Element UI", "Ant Design Vue", "Vant UI",
+    "DApp 开发", "性能优化", "代码分析", "排序", "大厂算法真题", "模拟", "哈希集合", "不定滑窗",
+    "编程导航", "前端 "
+  ],
+  "directions": [
+    {
+      "name": "HTML 与 DOM 语义",
+      "tags": ["HTML", "HTML5"],
+      "forceKeywords": [
+        "DOM 和 BOM", "BOM 和 DOM", "DOM 操作", "DOM 树", "事件流", "事件冒泡",
+        "冒泡和捕获", "事件捕获", "事件委托", "浏览器对象模型", "文档对象模型",
+        "阻止事件冒泡", "语义化", "DOCTYPE", "表单控件", "自定义元素"
+      ],
+      "keywords": [
+        "HTML", "HTML5", "HTML4", "语义化", "DOCTYPE", "iframe", "srcset", "行内元素",
+        "块级元素", "head 标签", "标签的作用", "meta 标签", "meta viewport", "SEO",
+        "alt 属性", "title 与 h1", "自定义元素", "Shadow DOM", "Web Components",
+        "页面加载", "HTML 标签", "HTML4 与 HTML5", "DOM 和 BOM", "BOM 和 DOM",
+        "DOM 操作", "DOM 树", "事件流", "事件冒泡", "冒泡和捕获", "事件捕获",
+        "事件委托", "浏览器对象模型", "文档对象模型"
+      ],
+      "icon": "🌐"
+    },
+    {
+      "name": "CSS 与布局",
+      "tags": ["CSS", "CSS3", "布局", "伪类", "CSS动画"],
+      "keywords": [
+        "CSS", "flex", "grid", "定位", "重排", "重绘", "动画", "样式", "居中", "层叠",
+        "继承", "BFC", "响应式", "媒体查询", "sticky", "float", "transform", "transition",
+        "animation", "变量", "自定义属性", "预处理", "less", "sass", "tailwind", "vw", "rem",
+        "display", "position", "z-index", "伪元素", "line-height", "盒模型", "margin", "padding"
+      ],
+      "icon": "🎨"
+    },
+    {
+      "name": "JavaScript 核心",
+      "tags": [
+        "JavaScript", "作用域", "原型", "闭包", "对象", "数据类型", "ES6", "Promise",
+        "异步编程", "正则表达式", "异步", "字符串", "JSX", "原理", "前端手写代码",
+        "字符串处理", "函数柯里化", "链式调用", "事件处理", "异步编程", "代码分析"
+      ],
+      "keywords": [
+        "事件循环", "this", "继承", "深拷贝", "浅拷贝", "数组", "字符串", "Promise",
+        "async", "防抖", "节流", "模块化", "宏任务", "微任务", "原型链", "垃圾回收",
+        "类型转换", "Symbol", "BigInt", "generator", "iterator", "Proxy", "Reflect",
+        "正则", "包装函数", "作用域", "闭包", "变量提升", "解构", "展开运算符",
+        "跨页面通信", "中止网络请求", "元素拖拽"
+      ],
+      "icon": "🟨"
+    },
+    {
+      "name": "TypeScript",
+      "tags": ["TypeScript", "GraphQL Schema"],
+      "forceKeywords": [
+        "TypeScript", "TS 的", "tsconfig", "类型体操", "泛型", "类型别名",
+        "类型守卫", "类型推断", "枚举", "接口和类型"
+      ],
+      "keywords": [
+        "TypeScript", "类型体操", "泛型", "类型推断", "interface", "类型别名", "类型守卫",
+        "readonly", "never", "unknown", "any", "infer", "keyof", "satisfies", "映射类型",
+        "条件类型", "索引访问类型", "模板字面量类型", "工具类型", "Partial", "Required",
+        "Pick", "Omit", "Record", "Exclude", "Extract", "ReturnType", "Parameters",
+        "InstanceType", "Awaited", "NonNullable", "类", "重载", "静态类型检测", "类型安全",
+        "枚举", "装饰器"
+      ],
+      "icon": "🟦"
+    },
+    {
+      "name": "React",
+      "tags": [
+        "React", "React基础", "React进阶", "React原理", "React状态管理", "React工具",
+        "Redux", "状态管理", "MobX", "Pinia", "React组件库", "React库", "React Hooks",
+        "React Router", "Next.js", "Next.js 基础", "Next.js 路由", "Next.js SSR",
+        "Next.js SSG", "Next.js ISR", "Next.js 渲染策略", "Next.js 数据获取",
+        "Next.js Server Components", "Next.js App Router", "Next.js 缓存",
+        "Next.js 部署", "Next.js API"
+      ],
+      "keywords": [
+        "React", "Hook", "虚拟DOM", "Fiber", "Diff", "setState", "组件", "JSX",
+        "useMemo", "useCallback", "useEffect", "useReducer", "memo", "forwardRef",
+        "Suspense", "并发", "服务端组件", "水合", "key", "受控组件", "非受控组件",
+        "高阶组件", "HOC", "Context", "渲染劫持", "不可变", "immutable", "重新渲染",
+        "React 组件卸载", "Fragment", "Portal", "ref", "state", "props", "state 管理"
+      ],
+      "icon": "⚛️"
+    },
+    {
+      "name": "Vue",
+      "tags": [
+        "Vue", "Vue基础", "Vue进阶", "Vue库", "Vue Router", "Vuex", "Vue3", "Vue原理",
+        "Vue工具", "Vue组件库", "Element UI", "Ant Design Vue", "Vant UI"
+      ],
+      "keywords": [
+        "Vue", "响应式", "nextTick", "computed", "watch", "插槽", "keep-alive", "路由",
+        "setup", "组合式 API", "生命周期", "指令", "mixin", "ref", "reactive", "v-model",
+        "provide", "inject", "自定义指令", "渲染函数", "动态组件", "异步组件", "v-html",
+        "v-if", "v-show", "Vuex", "Pinia", "模板编译", "数据劫持"
+      ],
+      "icon": "💚"
+    },
+    {
+      "name": "Node.js 与服务端数据层",
+      "tags": ["Node.js", "Node框架", "Express", "Koa", "GraphQL", "Apollo Client"],
+      "keywords": [
+        "Node", "Express", "Koa", "SSR", "BFF", "中间件", "Stream", "事件循环", "GraphQL",
+        "接口", "路由", "定时器", "Buffer", "process", "全局对象", "会话", "RESTful",
+        "缓存", "反向代理", "OAuth", "JWT", "请求参数", "响应", "http 模块", "文件系统",
+        "serverless", "微服务", "schema", "resolver", "查询", "分页"
+      ],
+      "icon": "🟩"
+    },
+    {
+      "name": "前端工程化",
+      "tags": [
+        "前端工程化", "工程化", "Webpack", "Vite", "Babel", "单元测试", "npm", "Monorepo",
+        "pnpm", "yarn", "前端包管理", "前端脚手架", "前端模块化", "前端兼容性",
+        "前端部署", "Git", "Git 操作", "Git 进阶", "Git 协作应用", "ESLint", "Husky",
+        "Sass", "Gulp", "Grunt", "Umi", "CI/CD", "编码规范", "多环境", "serverless",
+        "Ant Design Pro", "代码分析"
+      ],
+      "keywords": [
+        "vite", "构建", "打包", "模块化", "微前端", "monorepo", "eslint", "husky", "规范",
+        "脚手架", "依赖", "TSConfig", "tree shaking", "Tree Shaking", "代码分割",
+        "source map", "loader", "plugin", "热更新", "HMR", "babel", "预处理器",
+        "发布", "灰度", "lock", "workspace", "版本管理", "分支", "rebase", "merge",
+        "commit", "package.json", "npm", "pnpm", "yarn", "兼容性", "浏览器兼容",
+        "polyfill", "babel 插件", "webpack 配置", "部署", "容器化"
+      ],
+      "icon": "⚙️"
+    },
+    {
+      "name": "浏览器与网络",
+      "tags": [
+        "计算机网络", "网络协议", "网络", "网络基础", "HTTP", "HTTPS", "DNS", "代理",
+        "CDN", "WebSocket", "Socket", "SSE", "浏览器", "渲染机制", "缓存", "网络配置"
+      ],
+      "keywords": [
+        "HTTP", "跨域", "CORS", "缓存", "Cookie", "Session", "TCP", "UDP", "浏览器",
+        "渲染", "Service Worker", "存储", "localStorage", "sessionStorage", "IndexedDB",
+        "强缓存", "协商缓存", "请求头", "keep-alive", "预连接", "预取", "QUIC",
+        "HTTP 2", "HTTP 3", "DNS", "CDN", "代理", "反向代理", "WebSocket", "SSE",
+        "流式", "QUIC", "重定向", "Content-Type", "状态码", "三次握手", "拥塞控制",
+        "离线储存", "历史记录", "路由", "SPA", "首屏", "解析过程", "网络故障排查"
+      ],
+      "icon": "🌐"
+    },
+    {
+      "name": "性能优化",
+      "tags": ["前端性能优化", "性能优化", "内存", "前端系统设计"],
+      "excludeTags": ["Electron", "Flutter", "React Native", "鸿蒙", "WebAssembly", "游戏开发", "Next.js", "Docker", "云原生", "BI"],
+      "keywords": [
+        "性能", "优化", "首屏", "懒加载", "代码分割", "Tree Shaking", "内存泄漏", "长列表",
+        "渲染", "虚拟列表", "骨架屏", "白屏", "渲染阻塞", "字体", "图片优化", "webp",
+        "预加载", "关键渲染路径", "长任务", "帧率", "卡顿", "防抖", "节流", "缓存策略",
+        "请求合并", "预渲染", "SSR", "首屏时间", "白屏时间", "体积", "压缩", "监控上报",
+        "重新渲染", "浅层渲染", "路由懒加载"
+      ],
+      "icon": "🚀"
+    },
+    {
+      "name": "前端安全",
+      "tags": [
+        "网络安全", "网站安全", "前端安全", "密码学", "安全开发", "安全", "认证",
+        "XSS", "CSRF", "XSS 攻击", "CSRF 攻击", "JWT", "OAuth 2.0", "密码存储", "密码加盐"
+      ],
+      "forceKeywords": [
+        "XSS", "CSRF", "点击劫持", "内容安全策略", "CSP", "SameSite", "httpOnly",
+        "同源策略", "跨站脚本", "脚本注入", "盗链", "防盗链", "水印",
+        "密码存储", "加盐哈希", "bcrypt", "Argon2", "明文存储", "会话劫持",
+        "中间人攻击", "钓鱼", "越权", "暴力破解", "iframe 沙箱", "安全响应头"
+      ],
+      "keywords": [
+        "XSS", "CSRF", "安全", "加密", "鉴权", "点击劫持", "内容安全策略", "CSP",
+        "SameSite", "httpOnly", "跨站", "劫持", "注入", "中间人", "白名单", "沙箱",
+        "签名", "JWT", "token", "Cookie", "同源策略", "钓鱼", "暴力破解", "渗透",
+        "漏洞", "脱敏", "敏感", "权限", "风控", "审计", "加盐", "哈希", "HMAC",
+        "密码存储", "明文存储", "非对称加密", "对称加密", "数字签名", "密钥管理",
+        "正则表达式", "转义", "输入校验", "iframe 沙箱", "混合内容", "SSRF", "XXE",
+        "水印", "防盗链", "混淆", "调试前端", "控制台", "哈希函数", "MD5", "SHA"
+      ],
+      "icon": "🛡️"
+    },
+    {
+      "name": "可视化与图形",
+      "tags": ["Echarts", "可视化", "数据可视化", "Canvas", "SVG", "WebAssembly", "Three.js", "游戏开发"],
+      "forceKeywords": [
+        "Canvas", "SVG", "WebGL", "ECharts", "Echarts", "Three.js", "WebAssembly",
+        "光栅化", "着色器", "数据大屏", "桑基图", "词云"
+      ],
+      "keywords": [
+        "Canvas", "SVG", "Echarts", "ECharts", "图表", "WebGL", "可视化", "绘制",
+        "图形", "折线图", "柱状图", "坐标系", "路径", "像素", "位图", "矢量",
+        "WebAssembly", "WASM", "着色器", "shader", "动画引擎", "离屏", "裁剪",
+        "交互式图表", "大屏", "统计图表", "数据分析", "三维", "3d", "渲染引擎",
+        "wasm", "WASI", "Emscripten", "Rust", "共享内存"
+      ],
+      "icon": "📊"
+    },
+    {
+      "name": "跨端与移动端",
+      "tags": [
+        "Flutter", "Electron", "移动端适配", "响应式", "响应式开发", "小程序", "跨端",
+        "uni-app", "Taro", "React Native", "React Native 基础",
+        "H5 移动端开发", "H5 基础", "H5 适配", "H5 布局", "H5 触摸事件",
+        "H5 性能优化", "H5 兼容性", "H5 混合开发", "H5 框架"
+      ],
+      "keywords": [
+        "移动端", "跨端", "小程序", "响应式", "适配", "rem", "vw", "Electron", "Flutter",
+        "触摸事件", "安全区", "刘海屏", "手势", "滚动穿透", "Widget", "Dart", "热重载",
+        "主进程", "渲染进程", "IPC", "BrowserWindow", "webContents", "上下文隔离",
+        "React Native", "Bridge", "Navigator", "ListView", "dio", "混合", "webview"
+      ],
+      "icon": "📱"
+    },
+    {
+      "name": "设计模式与前端架构",
+      "tags": [
+        "设计模式", "架构", "架构设计", "架构延伸", "微前端", "组件设计", "组件",
+        "组件声明", "组件通信", "基础理论", "计算机基础"
+      ],
+      "keywords": [
+        "设计模式", "架构", "微前端", "组件设计", "单一职责", "发布订阅", "观察者",
+        "单例", "工厂模式", "策略模式", "适配器", "装饰器", "代理模式", "命令模式",
+        "迭代器", "状态模式", "职责链", "模板方法", "组合模式", "享元", "建造者",
+        "原型模式", "桥接", "MVVM", "依赖注入", "分层", "解耦", "高内聚", "低耦合",
+        "模块化设计", "组件库", "系统设计", "技术挑战", "整体架构", "技术方案"
+      ],
+      "icon": "🏗️"
+    },
+    {
+      "name": "数据结构与算法",
+      "tags": [
+        "数据结构", "算法", "链表", "树", "图", "堆", "栈", "队列", "DFS", "BFS",
+        "动态规划", "贪心", "双指针", "位运算", "回溯", "字符串", "前缀和", "Trie", "并查集",
+        "排序", "大厂算法真题", "哈希集合", "不定滑窗", "模拟"
+      ],
+      "keywords": [
+        "算法", "数据结构", "排序", "二分", "递归", "链表", "二叉树", "动态规划",
+        "时间复杂度", "空间复杂度", "手写", "快排", "归并", "堆排序", "拓扑排序",
+        "最短路径", "贪心", "回溯", "字符串匹配", "滑动窗口", "双指针", "前缀树",
+        "字典树", "位运算", "广度优先", "深度优先", "哈希表", "队列", "栈", "堆",
+        "数组去重", "斐波那契", "爬楼梯", "最长公共子序列", "合并两个有序数组"
+      ],
+      "icon": "🧮"
+    },
+    {
+      "name": "前端场景与项目实战",
+      "tags": ["编程导航", "前端场景", "umi-request"],
+      "tagWeight": 1,
+      "keywords": [
+        "项目", "实战", "场景", "需求", "业务流程", "模板", "脚手架", "封装",
+        "降级", "兜底", "异常处理", "拦截器", "权限", "批量", "嵌套表单", "搜索",
+        "实时预览", "协同编辑", "图片上传", "文件下载", "图片搜索", "分享", "编辑",
+        "布局", "导航菜单", "登录用户", "API 请求地址", "环境变量", "OpenAPI", "bytemd"
+      ],
+      "icon": "🧩"
+    }
+  ]
+}
