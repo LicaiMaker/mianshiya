@@ -1,0 +1,731 @@
+{
+  "meta": {
+    "title": "前端面试题库（每日轮转出题）",
+    "source": "https://mianshiya.com/tag/前端 与本仓库 LicaiMaker/mianshiya 技术栈（React 17 + TypeScript + UmiJS 3 + Ant Design 4 + Less + axios/umi-request + Express + 云函数 + ES/Redis）",
+    "anchorDate": "2026-10-25",
+    "perDirectionPerDay": 2,
+    "levels": ["简单", "中等", "困难"]
+  },
+  "directions": [
+    {
+      "id": "html",
+      "name": "HTML 与语义化",
+      "questions": [
+        {
+          "q": "常见的 HTML 语义化标签有哪些？为什么推荐用语义化标签而不是全部写成 div？",
+          "a": "header/nav/main/aside/section/article/footer/figure/label 等。收益：SEO 抓取更准、屏幕阅读器可按地标快速跳转、DOM 结构可读性好、后续改版与样式定位成本低；div 无语义，所有节点在可访问性树上被同等对待。",
+          "lv": "简单"
+        },
+        {
+          "q": "script、defer 与 async 有什么区别？放在 head 和 body 里分别有什么影响？",
+          "a": "普通 script 会阻塞 HTML 解析并执行；defer 延迟到文档解析完成后按顺序执行（不阻塞解析、可并行下载）；async 下载不阻塞解析，加载完立即执行且顺序不保证。type=\"module\" 默认等同 defer。放 head 需 defer/async 否则阻塞首屏；放 body 末尾可减少阻塞但仍会等待下载。",
+          "lv": "中等"
+        },
+        {
+          "q": "浏览器解析 HTML 的过程是怎样的？遇到 img、script、style 分别会发生什么？preload / prefetch / dns-prefetch 有何区别？",
+          "a": "HTML 流式解析建 DOM，preload scanner 提前扫描并预取子资源。img 异步下载但需 CSSOM 才渲染（样式未定可能阻塞绘制），script 阻塞解析并执行，style 阻塞渲染。preload 立即以高优先级下载当前页面关键资源；prefetch 空闲时预取下一页资源；dns-prefetch 只做 DNS 解析预热。",
+          "lv": "中等"
+        },
+        {
+          "q": "前端需要做哪些 SEO 优化？为什么纯 SPA 对 SEO 不友好？",
+          "a": "title/description 唯一且含关键词、语义化标签、h1-h6 层级合理、图片 alt、canonical、robots.txt 与 sitemap、结构化数据 JSON-LD、路由可抓取。SPA 首屏 HTML 为空壳，爬虫拿不到正文，需 SSR/SSG/预渲染补齐内容，并配合动态路由的 SSR 规则。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何实现一个可访问性（a11y）良好的表单？有哪些必做项？",
+          "a": "label for 关联控件、required/aria-required、aria-invalid 与 aria-describedby 挂错误提示、fieldset/legend 分组、合理的 tabindex 与焦点顺序、role=\"alert\" 播报错误、颜色不是唯一信息载体（色盲友好）、 autocomplete 提升填写效率。",
+          "lv": "中等"
+        },
+        {
+          "q": "input 常用 type 有哪些？disabled、readonly、hidden、display:none 的元素在表单提交与可访问性上有什么区别？",
+          "a": "常见 type：text/email/password/number/tel/url/search/date/file/radio/checkbox/hidden/submit/button。disabled 不参与提交也不可聚焦；readonly 参与提交但不可编辑；type=hidden 参与提交但不可见；display:none 与 hidden 的元素会从可访问性树移除，读屏软件无法感知。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "css",
+      "name": "CSS 与布局工程",
+      "questions": [
+        {
+          "q": "什么是 BFC（块级格式化上下文）？哪些属性会触发 BFC，它能解决什么问题？",
+          "a": "触发条件：float、position:absolute/fixed、display:flex/grid、overflow 非 visible、contain:content、will-change 等。作用：阻止外边距合并、包含浮动子元素、不与浮动元素重叠、让 margin:auto 在垂直方向居中生效。",
+          "lv": "中等"
+        },
+        {
+          "q": "Flex 布局与 Grid 布局的区别与各自适用场景？",
+          "a": "Flex 是一维布局（沿主轴排列与分配空间），适合一维排列、导航栏、卡片内部排布；Grid 是二维布局（行 + 列轨道），适合页面级整体布局与复杂对齐，支持 gap、auto-fit/auto-fill、命名区域、显式轨道。",
+          "lv": "简单"
+        },
+        {
+          "q": "position: sticky 失效的常见原因有哪些？",
+          "a": "父容器 overflow 非 visible（hidden/auto 会生成滚动容器）、父容器高度未被内容撑开、元素是 flex/grid 子项却没设 align-self、没写 top/bottom 定位值、祖先存在 transform/filter/will-change 改变了包含块。",
+          "lv": "中等"
+        },
+        {
+          "q": "什么是层叠上下文与层叠顺序？为什么 transform、opacity 会\"意外\"改变元素的层级关系？",
+          "a": "层叠上下文由 position+z-index 非 auto、opacity<1、transform、filter、will-change、isolation:isolate、flex/grid 子项 z-index 非 auto 等创建；同层内按 z-index 再按文档序排序。transform/opacity 会创建层叠上下文并成为包含块，使子元素的 z-index 只在本层内生效，因此表现为\"层级被改变\"。",
+          "lv": "困难"
+        },
+        {
+          "q": "transition 与 animation 的区别？animation-fill-mode 有什么作用？",
+          "a": "transition 由状态变化触发、只能过渡可插值的属性、无独立生命周期控制；animation 用关键帧驱动、可循环/暂停/反向、可设置延迟与填充。fill-mode：none/forwards/backwards/both 决定动画结束后或开始前是否保持关键帧样式。性能上优先只动 transform 和 opacity。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何解决 CSS 样式冲突？CSS Modules、Scoped、CSS-in-JS、Cascade Layers 各自的取舍？",
+          "a": "全局层面靠特异性、顺序、!important 决定，冲突难维护。CSS Modules 用 hash 类名做真隔离、零运行时；Scoped 编译期加属性选择器，简单但作用于根节点和深层选择器时有坑；CSS-in-JS 有运行时开销与样式动态能力；@layer 显式分层，可替代大量 !important。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "js",
+      "name": "JavaScript 核心",
+      "questions": [
+        {
+          "q": "var、let、const 的区别是什么？闭包有什么作用和典型使用场景？",
+          "a": "var 是函数作用域、声明提升、可重复声明；let/const 是块作用域、存在暂时性死区、同一作用域不可重复声明，const 绑定不可变但对象内部仍可变。闭包 = 函数 + 它定义时的词法环境，常用于私有变量、柯里化、防抖节流、事件监听器缓存、循环中绑定变量。",
+          "lv": "中等"
+        },
+        {
+          "q": "this 的绑定规则有哪些？箭头函数的 this 有什么特点？",
+          "a": "优先级：new > 显式（call/apply/bind）> 隐式（obj.fn()）> 默认（非严格为 undefined，严格为全局）。箭头函数没有自己的 this，继承定义时的外层 this，且 this 不可被 call/bind 改变、不能做构造函数、没有 arguments。",
+          "lv": "中等"
+        },
+        {
+          "q": "什么是原型链？class、extends、super 与传统原型继承是什么关系？",
+          "a": "每个对象有内部 [[Prototype]] 指向构造函数的 prototype，属性查找沿原型链向上。class 是原型继承的语法封装（方法放在 prototype 上），extends 通过设置原型链实现继承，super 调用父类构造与方法；派生类构造函数必须先调用 super 才能访问 this。",
+          "lv": "中等"
+        },
+        {
+          "q": "浅拷贝与深拷贝的区别？实现一个深拷贝要注意什么？",
+          "a": "展开运算符/Object.assign/Array.slice 只复制一层引用。深拷贝要递归复制。JSON.parse(JSON.stringify) 会丢失 undefined/function/Symbol、Date 变字符串、无法处理循环引用。手工实现需处理循环引用（WeakMap 缓存）、Map/Set、Date/RegExp、Symbol 键，并用 Object.prototype.toString 做类型判断。",
+          "lv": "中等"
+        },
+        {
+          "q": "防抖（debounce）和节流（throttle）的区别与实现？leading / trailing 分别是什么？",
+          "a": "防抖：连续触发停止 wait 毫秒后才执行一次（传 immediate 可先执行一次）；节流：固定时间窗口内最多执行一次。leading 表示首次立即执行，trailing 表示结束后补执行一次，两者可组合。实现上都要用时间戳或定时器，并提供 cancel/flush 能力。",
+          "lv": "中等"
+        },
+        {
+          "q": "数组去重、数组扁平化、以及类似股票最大差价这类高频手写题怎么写？",
+          "a": "去重用 Set、filter+indexOf、Map 按字段去重；扁平化用 flat(Infinity)、reduce+concat、flatMap；求最大差价一轮遍历维护最小值即可。注意复杂度与边界（空数组、NaN、去重后顺序）。",
+          "lv": "简单"
+        }
+      ]
+    },
+    {
+      "id": "async",
+      "name": "异步编程与事件循环",
+      "questions": [
+        {
+          "q": "宏任务（macroTask）和微任务（microTask）分别有哪些？它们的执行顺序是怎样的？",
+          "a": "宏任务：script、setTimeout/setInterval、I/O、UI 事件、MessageChannel、postMessage；微任务：Promise.then/catch/finally、queueMicrotask、MutationObserver（Node 还有 process.nextTick）。每轮取一个宏任务执行完后立刻清空整个微任务队列，再进入下一轮。",
+          "lv": "中等"
+        },
+        {
+          "q": "Promise 的状态流转是怎样的？Promise 链中如何正确处理错误？",
+          "a": "pending → fulfilled/rejected，一旦 settle 不可再变。then(onFulfilled, onRejected) 返回新 Promise，值/错误沿链传递；catch 捕获 rejection，finally 透传结果不改变值。常见坑是链尾不写 catch 导致 unhandledrejection，以及把 catch 写在会抛错的 then 之前。",
+          "lv": "中等"
+        },
+        {
+          "q": "async/await 的执行顺序是怎样的？await 后面的代码什么时候执行？",
+          "a": "async 函数总是返回 Promise；await 会把后续代码排到微任务队列，等被 await 的值 settle 后再继续执行（等价于 Promise.then + generator）。try/catch 可捕获 await 的 rejection；for await...of 可遍历异步迭代器；并发执行要用 Promise.all 而不是顺序 await。",
+          "lv": "中等"
+        },
+        {
+          "q": "手写 Promise.all / Promise.allSettled 要注意哪些细节？",
+          "a": "all：任一 reject 立即 reject（但其他请求仍继续），空数组立即 resolve，结果按输入顺序而非完成顺序；allSettled 永不 reject，返回 {status, value|reason} 数组；race 取第一个 settle 的；any 取第一个 fulfilled，全部失败才 reject。非 Promise 值要 Promise.resolve 包装。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何控制并发请求数量？什么是请求竞态（race condition）？",
+          "a": "并发控制：并发池/队列（p-limit）、批量聚合请求、AbortController 取消无用请求。竞态：先发后到的旧响应覆盖新数据，典型场景是搜索建议和路由快速切换；解决办法是带请求序号/时间戳比对后再落地数据，或直接 abort 掉旧请求。",
+          "lv": "中等"
+        },
+        {
+          "q": "setTimeout(fn, 0) 为什么不保证立刻执行？requestIdleCallback 和 scheduler.postTask 又是什么？",
+          "a": "0 会被浏览器钳制到约 4ms（嵌套超过 5 层后固定 4ms），且必须等当前宏任务与全部微任务执行完才有机会运行。requestIdleCallback 在浏览器空闲时执行，可能被饿死；scheduler.postTask 按优先级调度，优先级高于 rIC。",
+          "lv": "困难"
+        }
+      ]
+    },
+    {
+      "id": "ts",
+      "name": "TypeScript",
+      "questions": [
+        {
+          "q": "any、unknown、never、void 四个类型有什么区别？工程上该用哪个？",
+          "a": "any 关闭类型检查且会向外传播错误，慎用；unknown 是 any 的安全版，使用前必须收窄；never 表示不可能出现的值，可用于穷尽检查和永不返回的函数；void 表示忽略返回值。第三方/动态数据一律用 unknown 再收窄。",
+          "lv": "简单"
+        },
+        {
+          "q": "泛型、泛型约束、条件类型、映射类型、类型推断分别解决什么问题？",
+          "a": "泛型 T 让类型可参数化；extends 约束取值范围；条件类型 T extends U ? X : Y 用于按条件分发；映射类型 { [K in keyof T]: ... } 批量变换属性；infer 从参数反推类型。典型用于 API 封装、工具函数、路由参数与表单的字段级安全。",
+          "lv": "中等"
+        },
+        {
+          "q": "联合类型与交叉类型有什么区别？类型收窄（narrowing）有哪些方式？",
+          "a": "A | B 是联合，A & B 是交叉。收窄方式：typeof、instanceof、in 运算符、=== 比较、真值判断、可辨识联合（discriminated union）、自定义类型谓词 x is T、as const 收窄字面量类型。控制流分析会在分支内自动缩小类型。",
+          "lv": "中等"
+        },
+        {
+          "q": "interface 与 type 有什么区别？declare、namespace、*.d.ts 分别用来做什么？",
+          "a": "interface 只能描述对象类型、可 extends、可声明合并；type 是别名，支持联合/条件/映射/元组。declare 用于声明 ambient 全局变量与模块；namespace 用来在模块内组织类型或旧式全局命名空间；*.d.ts 描述第三方库的模块类型，@types 提供内置库类型。",
+          "lv": "中等"
+        },
+        {
+          "q": "TypeScript 编译配置中 target、module、jsx、strict、declaration 分别起什么作用？",
+          "a": "target 决定语法降级目标（ES5/ES2015+）；module 决定产物模块规范（ESNext/CommonJS）；jsx 控制 JSX 编译方式（react-jsx 免 import React）；strict 打开一组严格检查（noImplicitAny、strictNullChecks 等）；declaration 生成 .d.ts 供库使用；还要关注 esModuleInterop、isolatedModules（const enum 需注意）、skipLibCheck。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何给第三方库补类型？泛型在 React 组件里有哪些典型用法？",
+          "a": "declare module 'xxx' 声明模块、装 @types/*、用 paths 做别名。React 泛型：useState<T>、useReducer<S, A>、表格 Column<T>[]、表单 setFieldValue<K extends keyof T>(key: K, value: T[K])，这样能在编译期约束字段与类型一一对应。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "questions": [
+        {
+          "q": "什么是 Virtual DOM？它解决了什么问题？React 的更新流程是怎样的？",
+          "a": "用 JS 对象描述 UI，把状态变化批量计算成最小 DOM 操作，避免直接命令式操作 DOM。流程：setState → 调度器排队 → render 生成新元素树 → diff/reconciliation 比对 → commit 更新真实 DOM；同层子节点靠 key 保持身份标识。",
+          "lv": "简单"
+        },
+        {
+          "q": "React Hooks 的闭包陷阱（stale closure）是什么？如何解决？",
+          "a": "useEffect/useCallback 捕获的是当次渲染的 state 快照，setInterval 或事件回调里读到旧值。解法：函数式更新 setState(prev => ...)、用 useRef 保存最新值、依赖数组补齐、把逻辑抽成自定义 hook（useLatest/useEvent），必要时用 flushSync 强制同步。",
+          "lv": "中等"
+        },
+        {
+          "q": "useEffect 的执行时机与依赖数组规则？它与 useLayoutEffect 有什么区别？",
+          "a": "useEffect 在浏览器绘制之后异步执行，不阻塞绘制；useLayoutEffect 在 DOM 变更后、绘制前同步执行，会阻塞一次绘制（用于测量尺寸、避免闪烁）。依赖数组浅比较，变化才重跑；返回函数作为清理；StrictMode 开发环境会双调用以暴露副作用问题。",
+          "lv": "中等"
+        },
+        {
+          "q": "React 性能优化有哪些手段？React.memo、useMemo、useCallback 分别解决什么问题？",
+          "a": "React.memo 在 props 浅比较相等时跳过子组件重渲染；useMemo 缓存昂贵计算结果或引用；useCallback 稳定函数引用便于传给 memo 子组件或作为 effect 依赖。配合 React DevTools Profiler 定位瓶颈；此外还有状态下沉、列表 key 稳定、虚拟列表、避免内联对象/箭头函数。memo 本身有比较成本，不要滥用。",
+          "lv": "中等"
+        },
+        {
+          "q": "React 18/19 的并发特性有哪些？useTransition、useDeferredValue、startTransition 解决什么问题？",
+          "a": "React 18 带来自动批处理、并发渲染（可中断可恢复）、Suspense 与流式 SSR、createRoot 替代 ReactDOM.render；useTransition 把非紧急更新标记为低优先级并返回 isPending；useDeferredValue 延迟传入昂贵值；startTransition 可包裹任意更新。React 19 进一步支持 use() 读取 Promise、Actions、ref 作为 prop 等。",
+          "lv": "中等"
+        },
+        {
+          "q": "受控组件与非受控组件的区别？列表和表单怎么做渲染优化？",
+          "a": "受控组件由 React 通过 value+onChange 管理，非受控用 ref/defaultValue 由 DOM 自行管理；大型表单用 react-hook-form 或 antd Form 减少重渲染。列表优化：用稳定 id 作 key、子组件 memo、虚拟列表（react-window/TanStack Virtual）、避免在 render 内创建新对象与内联函数。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "vue",
+      "name": "Vue",
+      "questions": [
+        {
+          "q": "Vue 2 的响应式原理是什么？Vue 3 做了哪些改变？",
+          "a": "Vue 2 用 Object.defineProperty 逐个劫持 data 属性，依赖收集在 getter、派发在 setter；数组需重写 push 等方法才能侦测，新增属性需 Vue.set。Vue 3 改用 Proxy 代理整个对象，新增/删除属性都能侦测，Proxy 代理的是原对象而 Vue 2 生成的是带访问器的副本；Vue 3 依赖收集用 track/trigger。",
+          "lv": "中等"
+        },
+        {
+          "q": "Vue 组件通信有哪些方式？各自适用什么场景？",
+          "a": "props 向下 + emit 向上、v-model、provide/inject 跨层级注入、$attrs/$listeners、作用域插槽、事件总线、pinia/vuex 全局状态。跨多层传参用 provide/inject，全局共享用状态库，不建议用事件总线承担全局状态。",
+          "lv": "简单"
+        },
+        {
+          "q": "Vue 的模板编译经历了哪些阶段？运行时编译和 SFC 预编译有什么区别？",
+          "a": "parse 生成 AST → optimize 标记静态节点 → generate 生成 render 函数并挂到组件上。SFC 由 vue-loader / @vitejs/plugin-vue 在构建期预编译，产物不含运行时编译器，包更小；runtime-only 构建无法编译字符串模板（full build 才带编译器）。",
+          "lv": "中等"
+        },
+        {
+          "q": "computed 和 watch 有什么区别？watch 的 deep、immediate、flush 分别怎么用？",
+          "a": "computed 是缓存的派生值，依赖不变不重算，适合模板取值；watch 是副作用，支持异步、可配置深度监听。deep 深度比较（代价大，尽量改用不可变数据），immediate 首次立即执行，flush 可选 pre/post/sync 决定回调时机。watchEffect 会自动收集依赖。",
+          "lv": "中等"
+        },
+        {
+          "q": "Vue Router 的 hash 与 history 模式有什么区别？有哪些路由守卫？动态路由如何做权限控制？",
+          "a": "hash 用 # 路由无需服务器配合；history 需服务端把路径 rewrite 回 index.html。守卫包括全局前置/后置 beforeEach/afterEach、beforeRouteEnter/Update/Leave。动态路由：登录后根据角色用 router.addRoute 注册，并在 beforeEach 里校验 token 与 route.meta.roles，无权限则重定向。",
+          "lv": "中等"
+        },
+        {
+          "q": "Composition API 相比 Options API 的优势？ref 与 reactive 有什么区别？",
+          "a": "优势：逻辑可复用（组合式函数）、逻辑聚合、TypeScript 推导更好。ref 用 .value 访问且可包裹任意类型；reactive 只支持对象/数组且解构会丢失响应性（需 toRefs）。生命周期钩子在 setup 中以 onXxx 形式使用，且必须在 setup 同步执行阶段注册。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "name": "工程化与构建",
+      "questions": [
+        {
+          "q": "Webpack 的核心概念有哪些？常用的构建优化手段有哪些？",
+          "a": "核心概念：entry/output、loader、plugin、module、chunk、mode、devServer。优化：splitChunks 分包、动态 import 代码分割、tree-shaking 配合 sideEffects、构建缓存（babel cache、持久化 cache）、Terser/cssnano 压缩、小资源内联、DllPlugin、并行构建与多线程压缩。",
+          "lv": "中等"
+        },
+        {
+          "q": "Vite 为什么开发启动快？生产构建为什么用 Rollup？dev 环境如何处理依赖？",
+          "a": "dev 阶段用 esbuild 预打包依赖（依赖扫描 + esbuild 转换到 node_modules/.vite），业务代码走原生 ESM 按需编译，无需整体 bundle，因此启动极快、HMR 更细粒度；build 阶段交给 Rollup，产物 chunk 划分与 tree-shaking 效果更好。",
+          "lv": "中等"
+        },
+        {
+          "q": "Babel 和 SWC 的作用是什么？preset、plugin、target 三者关系如何？",
+          "a": "两者都是 JS 转译器：把 JSX/TS/新语法降级到目标环境可运行。preset 是插件集合（preset-react、preset-typescript），plugin 是单个能力，target 来自 browserslist 决定降级到什么程度。Babel 生态成熟但较慢，SWC 用 Rust 实现、速度快，可作为 Jest 转译器。注意 preset-typescript 只擦除类型不做类型检查。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何设计前端项目的工程化规范？ESLint、Prettier、Husky、lint-staged、commitlint 分别做什么？",
+          "a": "ESLint 做静态检查（规则 + 插件），Prettier 负责格式化（与 ESLint 分工避免冲突），Husky 挂 Git hooks，lint-staged 只对本次暂存文件执行检查，commitlint 约束 commit message 规范，CI 再做一次全量校验。提交前跑 pre-commit，重要分支跑 pre-push。",
+          "lv": "中等"
+        },
+        {
+          "q": "什么是 Monorepo？pnpm workspace、Nx/Turborepo、Changesets 分别解决什么问题？",
+          "a": "Monorepo 把多包放一个仓库管理。pnpm workspace 统一安装与依赖链接（硬链接省空间、严格依赖隔离）；Nx/Turborepo 做增量构建与任务缓存（按依赖图拓扑执行）；Changesets 管理多包版本联动与 changelog 发布。收益是一致性与可见性，代价是 CI 与权限管理复杂度上升。",
+          "lv": "中等"
+        },
+        {
+          "q": "package.json 的语义化版本与 lock 文件有什么作用？如何规避依赖风险？",
+          "a": "^ 与 ~ 表示兼容范围，lock 文件锁定精确版本保证可复现安装（CI 用 npm ci）。风险规避：私有源与 scope 隔离、审计 npm audit / SCA 扫描、限制 install script、避免引入超大或无人维护的依赖、Renovate/Dependabot 自动升级并 review。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "node",
+      "name": "Node.js / BFF / Serverless",
+      "questions": [
+        {
+          "q": "Node.js 的事件循环和浏览器有什么区别？EventEmitter 是什么？",
+          "a": "Node 有多个阶段：timers、pending callbacks、idle/prepare、poll、check（setImmediate）、close callbacks；process.nextTick 队列优先于 Promise 微任务。EventEmitter 是事件驱动基类，支持 on/once/emit/off，error 事件若无人监听会直接抛异常。",
+          "lv": "中等"
+        },
+        {
+          "q": "Node 中如何处理大文件与内存溢出问题？",
+          "a": "使用 stream + pipe 处理大文件（注意 backpressure），分片读写避免一次性读入内存；fs 同步 API 走 libuv 线程池（默认 4 线程，可调 UV_THREADPOOL_SIZE）；CPU 密集任务用 worker_threads 或集群，避免阻塞事件循环。",
+          "lv": "中等"
+        },
+        {
+          "q": "什么是 BFF 层？和 API 网关、微服务有什么区别？",
+          "a": "BFF 是面向前端的聚合层，做数据聚合、裁剪、字段格式化与缓存，减少请求数并隔离后端变化；可按端拆分（PC / Mobile / 小程序）独立演进。网关做通用路由、鉴权、限流、灰度；微服务按业务能力拆分。BFF 代价是多一跳延迟与额外运维。",
+          "lv": "中等"
+        },
+        {
+          "q": "Serverless / 云函数（如本仓库 cloudfunctions 目录）有哪些特点？冷启动、连接复用、超时限制如何应对？",
+          "a": "特点：按量计费、免运维、自动弹性、事件驱动。冷启动来自运行时初始化，用预置并发/最小实例/provisioned concurrency 缓解；连接复用要复用数据库与 Redis 连接、避免频繁建连；注意执行超时与内存上限，函数要幂等并支持重试；不适合长连接与长耗时任务。",
+          "lv": "中等"
+        },
+        {
+          "q": "Express / Koa 的中间件执行机制是怎样的？Koa 的洋葱模型与错误处理？",
+          "a": "中间签名为 (req, res, next)，按注册顺序执行，next() 推进到下一层，返回响应则中断。Koa 是洋葱模型：进入时由外到内，next 之后由内到外返回，便于做耗时统计。错误处理用 try/catch 或四个参数的中间件 (err, req, res, next) 统一捕获。",
+          "lv": "中等"
+        },
+        {
+          "q": "服务端如何做缓存与限流？Redis 常见应用场景有哪些？缓存三大问题怎么解决？",
+          "a": "缓存：进程内 Map（带 TTL）与 Redis；限流：令牌桶/漏桶/固定窗口/滑动窗口。Redis 场景：缓存、会话、排行榜、分布式锁、延时队列、发布订阅、限流令牌。缓存问题：穿透（布隆过滤器/空值缓存）、击穿（互斥重建/热点永不过期）、雪崩（随机 TTL/预热/多级缓存）。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "network",
+      "name": "网络与 HTTP",
+      "questions": [
+        {
+          "q": "HTTP 缓存机制是怎样的？强缓存和协商缓存的区别是什么？",
+          "a": "强缓存：Cache-Control（max-age、no-cache、no-store、private/public、s-maxage）与 Expires，命中则不发请求；no-cache 表示必须协商而非不缓存。协商缓存：If-None-Match/ETag、If-Modified-Since/Last-Modified，命中返回 304。ETag 优先级高于 Last-Modified，弱校验 Last-Modified 精度只到秒。",
+          "lv": "中等"
+        },
+        {
+          "q": "跨域有哪些解决方案？什么情况下会触发预检请求（OPTIONS）？",
+          "a": "方案：服务端 CORS 响应头（Access-Control-Allow-Origin/Credentials/Methods/Headers）、同源代理（nginx）、JSONP（仅 GET，已过时）、postMessage。简单请求（GET/HEAD/POST 且 Content-Type 为 text/plain、multipart/form-data、application/x-www-form-urlencoded）不预检；带自定义头、非简单 Content-Type、PUT/DELETE/PATCH 会先发 OPTIONS 预检，预检结果可用 Access-Control-Max-Age 缓存。",
+          "lv": "中等"
+        },
+        {
+          "q": "HTTP/1.1、HTTP/2、HTTP/3 的主要区别是什么？",
+          "a": "H1：文本分帧、队头阻塞、并发靠多连接、每次请求带完整头。H2：二进制分帧、多路复用、流量控制、HPACK 头压缩、服务器推送（浏览器支持有限）。H3：基于 QUIC（UDP），在传输层解决队头阻塞，握手可做到 1-RTT/0-RTT。H2 仍受 TCP 层队头阻塞影响。",
+          "lv": "中等"
+        },
+        {
+          "q": "常见 HTTP 状态码有哪些？401 与 403、301/302/307/308 分别有什么区别？",
+          "a": "2xx 成功（200/201/204）、3xx 重定向（301 永久、302 临时、304 协商缓存、307/308 保持方法与 body）、4xx 客户端（400 参数错、401 未认证、403 已认证但禁止、404、409 冲突、429 限流）、5xx 服务端（500/502/504）。302 历史上可能把 POST 改为 GET，307/308 不会。",
+          "lv": "简单"
+        },
+        {
+          "q": "TCP 为什么需要三次握手和四次挥手？HTTPS 的握手过程是怎样的？",
+          "a": "三次握手是为了双方确认收发能力并避免历史连接的歧义；四次挥手因为 TCP 是全双工，关闭需要两个方向各确认一次，服务端进入 TIME_WAIT 等 2MSL 保证最后的 ACK 可重传。TLS 握手：ClientHello（含 SNI）、服务端证书与密钥协商、ECDHE 交换密钥、生成会话密钥；TLS 1.3 简化为 1-RTT 并支持 0-RTT。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何优化前端请求？CDN 在其中扮演什么角色？",
+          "a": "手段：域名收敛（控制在 2~4 个）、HTTP/2 多路复用、gzip/br 压缩、请求合并与聚合、preload 关键资源、prefetch 次要资源、fetchpriority 调整优先级、并发上限控制。CDN 提供边缘缓存降低回源与延迟、就近分发静态资源、支持跨域与图片处理（可配 CORS 头）。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "browser",
+      "name": "浏览器原理与渲染",
+      "questions": [
+        {
+          "q": "从输入 URL 到页面渲染完成，浏览器经历了什么？",
+          "a": "DNS 解析 → TCP 连接 → TLS 握手 → 发送 HTTP 请求 → 收到响应 → 解析 HTML 构建 DOM → 解析 CSS 构建 CSSOM → 合成渲染树 → 布局（Layout）→ 绘制（Paint）→ 合成（Composite）。JS 脚本可能阻塞解析；关键渲染路径是首屏优化重点。",
+          "lv": "中等"
+        },
+        {
+          "q": "什么是重排（reflow）和重绘（repaint）？如何减少？",
+          "a": "重排是几何属性变化导致重新计算布局，最重；重绘是外观变化重新绘制像素；合成只是重新组装图层，最轻。减少办法：批量读写分离（先写后读）、避免频繁读取 offsetTop/scrollHeight、改动只用 transform/opacity 走合成层、contain 隔离、节流 resize 回调、虚拟 DOM 批量 diff。",
+          "lv": "中等"
+        },
+        {
+          "q": "浏览器的存储方案有哪些？分别适合什么场景？",
+          "a": "cookie：≤4KB、随请求发送、可设 httpOnly/secure/sameSite/expires；localStorage：同步、约 5~10MB、仅字符串、需手动清理；sessionStorage：会话级；IndexedDB：异步、容量大、可存结构化数据，适合离线与大量数据；Cache API 用于 Service Worker 缓存；敏感信息优先放内存而非 localStorage。",
+          "lv": "中等"
+        },
+        {
+          "q": "Service Worker 是什么？PWA 的核心能力有哪些？限制是什么？",
+          "a": "Service Worker 是独立线程的请求代理，可拦截 fetch 实现离线与自定义缓存策略（precache/runtime）。PWA 能力：可安装、可离线、推送通知、后台同步。限制：必须 HTTPS、仅部分浏览器支持、更新需配合 skipWaiting/clientsClaim、缓存需版本化清理。",
+          "lv": "中等"
+        },
+        {
+          "q": "页面生命周期事件有哪些？页面隐藏时可以做哪些优化？",
+          "a": "事件：DOMContentLoaded、load、visibilitychange、pagehide、beforeunload（慎用，会影响 bfcache）。隐藏时优化：暂停轮询与动画、取消未完成请求（AbortController）、上报埋点与离开时长、释放大对象、缓存草稿；用 IntersectionObserver 替代 scroll 监听以省电。",
+          "lv": "中等"
+        },
+        {
+          "q": "主流浏览器渲染引擎有哪些差异？Safari 兼容性上要特别注意什么？",
+          "a": "引擎：Blink（Chrome/Edge）、WebKit（Safari）、Gecko（Firefox）。Safari 注意：老版本不支持 flex gap、position:sticky 支持历史、100vh 与地址栏行为差异、backdrop-filter 性能、输入与合成事件（composition）行为差异。工程上用 browserslist + autoprefixer + caniuse 决策，必要时加 polyfill。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "perf",
+      "name": "前端性能优化",
+      "questions": [
+        {
+          "q": "前端有哪些核心性能指标？如何采集 Core Web Vitals？",
+          "a": "CWV 包含 LCP（最大内容绘制）、INP（交互到下一次绘制，取代 FID）、CLS（累积布局偏移）；辅助指标 FCP、TTFB、INP 长任务。用 PerformanceObserver/Performance API 或 web-vitals 库采集；实验室数据用 Lighthouse/RUM 分开看，真实用户监控更能反映线上体验。",
+          "lv": "中等"
+        },
+        {
+          "q": "首屏白屏时间长，有哪些优化手段？",
+          "a": "SSR/SSG 或预渲染减少等待；CDN 就近分发；关键 CSS 内联、非关键 CSS 异步加载；骨架屏掩盖白屏；preload 关键资源；路由级懒加载与分包；减少首屏 JS 体积；图片用 webp/avif 并按需加载；去掉阻塞渲染的同步脚本；必要时边缘渲染。",
+          "lv": "中等"
+        },
+        {
+          "q": "长列表渲染卡顿怎么优化？",
+          "a": "虚拟列表只渲染可视区（react-window / TanStack Virtual），配合固定行高与二分定位；万行以上用分页或分片加载；滚动事件节流并用 rAF 更新；行组件 memo；避免每行独立的 state 与频繁 setState；表格可考虑 canvas 渲染或服务端分页。",
+          "lv": "中等"
+        },
+        {
+          "q": "图片、字体、静态资源分别有哪些优化手段？",
+          "a": "图片：webp/avif、srcset/sizes 尺寸适配、loading=lazy 或 IntersectionObserver 懒加载、CDN 压缩、避免用 Base64 内联大图；字体：woff2 + 子集化 + font-display + preload 关键字体；静态资源：hash 文件名配长缓存、gzip/br、抽离公共包、必要时上 CDN。",
+          "lv": "简单"
+        },
+        {
+          "q": "常见的内存泄漏场景有哪些？如何排查？",
+          "a": "场景：未移除的事件监听、未清理的定时器/定时任务、全局变量持有 DOM、闭包缓存过大、第三方实例未销毁、Detached DOM。用 Chrome DevTools Memory 多次快照对比、用 Allocation instrumentation 看对象存活、用 Performance monitor 观察 JS 堆增长，定位 detached 节点与 retainer 链。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何优化打包产物体积？如何做产物分析？",
+          "a": "手段：路由级懒加载、组件库按需引入（babel-plugin-import / treeshaking）、配置 sideEffects、moment 换 dayjs、echarts 按需打包、避免重复依赖引入、大依赖拆成异步 chunk、公共包抽离。分析：webpack-bundle-analyzer、source-map-explorer、Vite 的构建可视化、CI 中做产物体积基线卡口。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name": "前端安全",
+      "questions": [
+        {
+          "q": "XSS 有哪些类型？如何防御？",
+          "a": "类型：存储型、反射型、DOM 型。防御：按输出上下文编码（HTML/属性/JS/URL）、避免 innerHTML/eval/Function、必须渲染富文本时用 DOMPurify 白名单过滤、配置 CSP、Cookie 设 httpOnly + Secure、HTTPS 传输。框架默认转义（React 危险 API 除外），但 dangerouslySetInnerHTML 等会绕过。",
+          "lv": "中等"
+        },
+        {
+          "q": "CSRF 的原理是什么？有哪些防御手段？SameSite Cookie 起到什么作用？",
+          "a": "原理：第三方站点发起的请求会携带用户 Cookie，服务端误认为同源请求。防御：CSRF Token（同步器模式或双提交 Cookie）、校验 Origin/Referer、关键操作二次验证、SameSite=Lax/Strict 限制跨站携带、CORS 不带凭证。局限：SameSite 不覆盖所有场景，且 GET 请求也可能带上 Lax Cookie。",
+          "lv": "中等"
+        },
+        {
+          "q": "点击劫持怎么防护？CSP 有哪些常用指令？",
+          "a": "点击劫持：攻击页用 iframe 覆盖诱导点击。防护用 X-Frame-Options: DENY/SAMEORIGIN，或 CSP 的 frame-ancestors，必要时 JS 顶层检测。常用 CSP 指令：default-src、script-src、style-src、img-src、connect-src、frame-src、object-src、base-uri、report-uri；script-src 用 nonce/hash 替代 unsafe-inline。",
+          "lv": "中等"
+        },
+        {
+          "q": "前端如何安全地存储与传递敏感信息？JWT 的优缺点是什么？",
+          "a": "密码绝不落前端；access token 存内存变量，refresh token 用 httpOnly + Secure + SameSite Cookie；敏感操作由服务端二次校验。JWT 优点是无状态、可校验、可跨服务；缺点是无法主动失效、体积大、密钥泄露即失守、需要 token 刷新与黑名单机制配合。",
+          "lv": "中等"
+        },
+        {
+          "q": "除了 XSS/CSRF，前端还面临哪些常见攻击？HTTPS 能防住什么？",
+          "a": "还有：中间人劫持、点击劫持、开放重定向、恶意依赖/供应链投毒、文件上传攻击、DNS 污染。HTTPS 防窃听与篡改，但完全不防 XSS 与 CSRF；需要配合 CSP、HSTS、CORS 策略、前端输入校验与服务端二次校验。",
+          "lv": "中等"
+        },
+        {
+          "q": "前端如何做依赖与供应链安全？代码混淆有什么局限？",
+          "a": "供应链：锁定 lockfile、npm audit/SCA 扫描、私有源与 scope 隔离、限制 install script、Renovate 自动升级、校验包来源与签名。混淆（terser/webpack-obfuscator）只能提高逆向成本，无法保护硬编码密钥——机密必须放服务端；同时注意 source map 泄露，生产环境应关闭或上传到内网。",
+          "lv": "困难"
+        }
+      ]
+    },
+    {
+      "id": "algo",
+      "name": "数据结构与算法",
+      "questions": [
+        {
+          "q": "数组去重、数组扁平化、对象数组按字段排序这类题分别怎么做？",
+          "a": "去重：Set、filter+indexOf、Map 按字段去重；扁平：flat(Infinity)、reduce+concat、flatMap；排序：sort 比较器必须返回负/正/0，注意不要用减法处理超大数字或字符串。注意复杂度与边界（空数组、NaN、稳定排序）。",
+          "lv": "简单"
+        },
+        {
+          "q": "两数之和、链表反转、二分查找的实现与边界如何处理？",
+          "a": "两数之和：哈希表 O(n) 或排序双指针；链表反转：迭代或递归，注意断开原链表并保存 next；二分查找：必须 left<=right、mid 用 left+(right-left)/2 防溢出、明确 left=mid+1 还是 right=mid 的边界，并要求数据有序。",
+          "lv": "简单"
+        },
+        {
+          "q": "用闭包实现柯里化、compose / pipe，以及记忆化（memoize）？",
+          "a": "柯里化返回高阶函数逐步收集参数；compose 右到左组合、pipe 左到右；memoize 用 Map（对象参数可用 WeakMap）按参数缓存，注意参数序列化作为 key 时的坑，以及缓存上限与失效策略。",
+          "lv": "中等"
+        },
+        {
+          "q": "树和图的遍历如何实现？BFS 与 DFS 的应用差异是什么？",
+          "a": "DFS 用递归或显式栈（深树避免爆栈），BFS 用队列 + visited 集合。二叉树常见前/中/后序与层序遍历；图中用于连通性、环检测、拓扑排序、最短路径（BFS 求无权最短路，Dijkstra 求带权最短路）。",
+          "lv": "中等"
+        },
+        {
+          "q": "前端常见的数据结构场景题：LRU 缓存、事件总线、并发任务池怎么实现？",
+          "a": "LRU：Map + 双向链表，get/set 均 O(1)，淘汰时删链表尾部；事件总线：Map<event, Set<listener>>，支持 once/off；并发任务池：计数器 + Promise 队列限制并发数；配合 debounce/throttle 处理高频触发。",
+          "lv": "中等"
+        },
+        {
+          "q": "大整数相加、版本号比较、字符串压缩这类经典题怎么做？",
+          "a": "大整数相加：按位相加并处理进位，用数组逆序存结果；版本号比较：按点分段转数字逐段比较，注意 1.10 与 1.9 的语义；字符串题注意是否原地、复杂度与边界。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "state",
+      "name": "状态管理与数据流",
+      "questions": [
+        {
+          "q": "前端状态如何分类？为什么不能把所有状态塞进一个全局 store？",
+          "a": "分类：局部 UI 状态、全局客户端状态（登录信息、主题）、服务端状态（缓存 + 请求 + 同步）、URL 状态、表单状态。混在一起会导致无关状态变更触发大范围重渲染、调试困难。服务端状态优先用 SWR/React Query 这类带缓存与失效的方案，而不是手写进全局 store。",
+          "lv": "中等"
+        },
+        {
+          "q": "Redux 的核心概念与数据流是什么？Redux Toolkit 带来了哪些改进？",
+          "a": "核心：store、state、action、reducer、middleware；数据流严格单向：dispatch(action) → reducer 产生新 state → 订阅者更新。RTK 提供 createSlice（自动 action/reducer）、immer 实现不可变更新（Proxy draft + 结构共享）、createAsyncThunk 处理异步、官方 devtools 与更好的 TS 推断。",
+          "lv": "中等"
+        },
+        {
+          "q": "React Context 有什么作用与局限？什么时候该上状态管理库？",
+          "a": "作用是跨层传递数据、避免 props 透传；局限是 value 变化会让所有消费者重渲染（可用 useMemo、拆分 Context、use-context-selector 缓解），且不适合高频更新的状态。跨路由、复杂异步、需 devtools/时间旅行/持久化时才引入 zustand / redux / mobx。",
+          "lv": "中等"
+        },
+        {
+          "q": "MobX、Zustand、Pinia、Vuex 各自特点与选型依据？",
+          "a": "MobX 基于可观察对象的自动依赖推导（observable/action/computed），心智负担小；Zustand 轻量、基于 selector 订阅、适合 React 小中型项目；Pinia 是 Vue 3 官方方案，组合式 API 写法、无 mutations、可 SSR；Vuex 是 Vue 2 方案（state/mutations/actions/modules）。选型看团队规模、状态复杂度和框架。",
+          "lv": "中等"
+        },
+        {
+          "q": "服务端状态管理（SWR / React Query）解决了什么问题？",
+          "a": "提供缓存与请求去重、后台重验证、stale-while-revalidate、乐观更新与失败回滚、无限滚动与分页、错误重试与状态机。避免手写 loading/error/缓存一致性代码，让服务端数据有明确的生命周期（stale → refetch → fresh）。",
+          "lv": "中等"
+        },
+        {
+          "q": "复杂表单和多页面之间的数据共享怎么做？",
+          "a": "表单用 antd Form / react-hook-form 做统一校验、联动与字段级订阅；跨页面共享可用 URL 参数、局部 store 或持久化草稿。避免把整份表单数据放全局 store 引发大范围重渲染；多步骤流程可用状态机（XState）显式描述状态与迁移。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "viz",
+      "name": "可视化与图形",
+      "questions": [
+        {
+          "q": "ECharts 有哪些核心能力？如何按需引入优化体积？",
+          "a": "能力：折线/柱状/饼/散点/地图/关系图/仪表盘、dataset、dataZoom、tooltip、markLine、响应式与大数据量降采样；渲染器可选 Canvas 或 SVG。按需引入：只注册需要的 charts + components + renderer（echarts/core），避免全量 echarts 打进主包。",
+          "lv": "中等"
+        },
+        {
+          "q": "Canvas 与 SVG 有什么区别？各自适合什么场景？",
+          "a": "Canvas 是位图绘制，适合元素数量大、频繁重绘（成千上万个点、动画、粒子），性能好但需自行做命中检测与交互；SVG 是矢量 DOM，事件系统与 CSS 天然可用、缩放不失真，适合少量图标、图表需要无障碍与 DOM 交互的场景。ECharts 大数据量默认用 Canvas。",
+          "lv": "中等"
+        },
+        {
+          "q": "大数据量图表卡顿怎么优化？",
+          "a": "降采样（LTTB）、分桶聚合、dataZoom 只渲染可视区间、抽样、关闭动画、切 Canvas 渲染、节流 setOption 触发、服务端预聚合；避免每次全量 setOption（用 setOption(option, {notMerge:false}) 合并）；极端场景下改用 WebGL 方案。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何实现图表联动与 tooltip 定制？",
+          "a": "联动：echarts.connect/group 同步 axisPointer，或用 dispatchAction 广播事件；tooltip 用 formatter 返回 HTML/富文本（支持 rich text）、axisPointer link；跨图表联动可用事件总线或状态统一管理 tooltip 状态。",
+          "lv": "中等"
+        },
+        {
+          "q": "WebGL / Three.js 适合什么场景？与 2D 图表如何取舍？",
+          "a": "适合三维模型、地球场景、海量粒子、3D 数据可视化；代价是学习成本、包体积、兼容性与降级处理。普通业务看板优先 SVG/Canvas，既够用又更省；只有确有三维或超大规模需求才引入 3D 引擎。",
+          "lv": "简单"
+        },
+        {
+          "q": "图表如何做主题、暗色模式与国际化？",
+          "a": "主题：echarts.registerTheme 注册，切换时 dispose 并重建实例；暗色模式：按主题切换颜色板或用 CSS 变量与 token 联动；国际化：注册 language 包并在 formatter 里用 Intl.NumberFormat/DateTimeFormat 格式化数字与日期；导出用 getDataURL 或服务端渲染保证清晰度。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "mobile",
+      "name": "移动端与跨端",
+      "questions": [
+        {
+          "q": "移动端适配有哪些方案？rem、vw/vh、媒体查询、CSS 像素与设备像素比的关系？",
+          "a": "DPR = 物理像素 / CSS 像素。方案：rem（动态设置根字号 + postcss-pxtorem）、vw/vh（1vw = 1% 视口宽）、flex/grid 流式布局、@media 断点栅格、viewport meta；现代方案用 clamp() 做流式字号、容器查询适配组件级响应。",
+          "lv": "中等"
+        },
+        {
+          "q": "移动端常见的性能与体验问题有哪些？",
+          "a": "长列表滚动掉帧、输入延迟、点击延迟与穿透、滚动穿透、软键盘顶起布局、发热耗电、弱网请求失败。方案：被动监听 passive、will-change 谨慎使用、rAF 节流滚动、虚拟列表、touch-action 优化、输入防抖与乐观更新、图片懒加载与压缩。",
+          "lv": "中等"
+        },
+        {
+          "q": "移动端点击穿透、滚动穿透、300ms 点击延迟如何解决？",
+          "a": "点击穿透：遮罩层阻止冒泡或 pointer-events:none + 提升遮罩层级；滚动穿透：touch-action、overscroll-behavior、锁定 body 高度与 overflow；300ms 延迟：viewport meta 设置 width=device-width 即可消除。",
+          "lv": "中等"
+        },
+        {
+          "q": "小程序与 H5 有什么区别？小程序与 H5 如何通信？",
+          "a": "小程序是双线程（逻辑层/渲染层隔离）、无 DOM、依赖平台 API、有包体积与审核限制；H5 是标准 Web。通信：web-view 组件内通过 postMessage + JSSDK 桥接；小程序与 H5 互跳通过 URL 参数传递数据（注意长度限制与编码）。",
+          "lv": "中等"
+        },
+        {
+          "q": "React Native、Flutter、uni-app 等跨端方案各自特点与限制？",
+          "a": "RN 用原生控件渲染、通过 JSI/新架构通信性能接近原生，需维护原生插件，样式接近 RN 语义；Flutter 自绘引擎两端表现一致、开发体验好，包体积较大；uni-app 一套代码多端、上手快但复杂场景性能受限。选型看团队技术栈、UI 复杂度与性能要求。",
+          "lv": "简单"
+        },
+        {
+          "q": "如何适配刘海屏、折叠屏与大屏？",
+          "a": "刘海屏：viewport-fit=cover + env(safe-area-inset-*) 做安全区 padding；折叠屏：用 @media (min-width) 分段布局、监听 resize 与屏幕折叠事件（screen.orientation / visualViewport）、优先 flex 流式布局；大屏用容器查询与多栏布局。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "design-system",
+      "name": "组件库与设计系统",
+      "questions": [
+        {
+          "q": "一个可用的组件库需要提供哪些能力？设计一个 Button 组件要注意什么？",
+          "a": "能力：一致的视觉规范、完整的 API 设计、受控/非受控双模式、可访问性、主题定制与暗色模式、国际化、TypeScript 类型、按需加载与 tree-shaking、文档与用例。Button：语义标签（button/a）、loading/disabled/icon/尺寸/形状/块级、键盘可达、焦点样式、防重复点击。",
+          "lv": "中等"
+        },
+        {
+          "q": "Ant Design 的主题定制是怎么实现的？如何支持暗黑模式？",
+          "a": "antd 4.x 通过 less 变量覆盖；5.x 引入 Design Token（CSS-in-JS 运行时 token）并用 ConfigProvider 包裹，通过 theme.config 或 token 覆盖实现定制，配合算法（theme.darkAlgorithm）切换暗色。需注意 token 优先级与组件级 token 的覆盖关系。",
+          "lv": "中等"
+        },
+        {
+          "q": "什么是设计系统与 Design Token？Token 的命名与分层怎么设计？",
+          "a": "设计系统 = 设计规范 + 组件库 + 工具链 + 协作流程。Token 分层：基础色（palette）、语义色（text.primary、bg.container）、组件级 token（Button.primaryBg）。命名用「类别.用途.状态」保证可预测性；通过 Style Dictionary / less 变量 / CSS 变量输出到多端，并保证对比度满足无障碍要求。",
+          "lv": "中等"
+        },
+        {
+          "q": "组件库如何做到按需引入、减少打包体积？",
+          "a": "产物同时提供 ESM 与 CJS 并标注 sideEffects，配合 babel-plugin-import 或 treeshaking 做到按需引入样式；图标独立成包按需打包；避免在组件顶层执行副作用；构建产物体积纳入 CI 基线监控。",
+          "lv": "中等"
+        },
+        {
+          "q": "低代码平台 / 组件编排在前端体系中的位置是什么？",
+          "a": "以 schema（JSON）驱动渲染：物料注册 + 组件树协议 + 插件机制 + 版本兼容 + 预览发布。适合运营配置页、营销落地页、报表；复杂交互与性能敏感场景仍需手写。要设计好扩展点与约束（哪些属性可配、布局如何约束、发布如何灰度回滚）。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何保证多端与多人协作下的视觉一致性？",
+          "a": "统一 design token 并随版本发布；视觉回归测试做截图对比；多分辨率与真机测试；设计走查清单（间距、字号、层级、交互态、暗黑、国际化）；组件有验收标准与变更记录；重大改版用 feature flag 灰度。",
+          "lv": "简单"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "name": "质量保障与工程效率",
+      "questions": [
+        {
+          "q": "前端有哪些测试类型？如何划分测试金字塔？",
+          "a": "类型：单元测试（Vitest/Jest）、组件/集成测试（Testing Library）、E2E（Playwright/Cypress）、视觉回归、契约测试、性能与兼容性测试。金字塔建议单元测试多、E2E 少（慢且脆）；以「风险 × 变更频率」决定投入，核心链路才上 E2E。",
+          "lv": "中等"
+        },
+        {
+          "q": "Vitest 与 Jest 有什么区别？为什么前端项目更常用 Vitest？",
+          "a": "Vitest 基于 Vite 与原生 ESM，启动快、watch 体验好、与 Vite 配置共享、API 与 Jest 部分兼容；Jest 生态成熟、jsdom 环境与 transform 生态更完整。Testing Library 强调按用户行为断言（getByRole）而不是实现细节；jsdom 没有真实布局 API，需 mock getBoundingClientRect。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何编写可维护的组件测试？有哪些常见反模式？",
+          "a": "做法：优先 getByRole/getByLabel 等语义查询、用 user-event 模拟真实交互、mock 网络与依赖而非组件内部、每个用例独立准备数据。反模式：断言实现细节（state、类名）、过度快照、测试之间共享可变状态、依赖执行顺序、为了通过而 mock 掉被测逻辑。",
+          "lv": "中等"
+        },
+        {
+          "q": "前端项目的 CI 流水线一般包含哪些步骤？",
+          "a": "常见顺序：安装（npm ci + 缓存）、lint、类型检查（tsc --noEmit）、单元测试、构建、产物上传与体积校验、E2E/视觉回归、部署到 CDN 或容器、冒烟验证与回滚预案。质量门禁（覆盖率、lint 报错、产物体积超阈值）不通过即阻断合并。",
+          "lv": "中等"
+        },
+        {
+          "q": "前端错误监控与埋点体系如何设计？",
+          "a": "错误监控：捕获 JS 异常、未处理 Promise、接口错误与资源加载失败，上报时带 sourceMap 还原堆栈（source map 不要公开）、区分版本与设备。埋点：事件模型（曝光/点击）、公共参数（用户、版本、页面）、批量上报 + sendBeacon、失败重试与去重、脱敏与采样。注意别把敏感数据写进日志。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何管理大型前端项目的规范与协作流程？",
+          "a": "规范文档 + 自动化工具强制（ESLint/Prettier/Husky/commitlint + CI 卡口）；CODEOWNERS 明确模块负责人；用 Changesets 管理跨包变更与发布；用 feature flag 灰度新功能；代码分层（pages / components / hooks / services / utils）；定期治理技术债（依赖升级、重复代码、废弃分支清理）。",
+          "lv": "中等"
+        }
+      ]
+    },
+    {
+      "id": "deploy",
+      "name": "部署运维与架构",
+      "questions": [
+        {
+          "q": "前端如何部署上线？CDN、Nginx、Docker 在其中分别做什么？",
+          "a": "流程：构建产出带内容 hash 的静态文件 → 上传 CDN 或静态服务器 → Nginx 做静态托管、gzip/brotli、缓存头、反向代理、SPA 回退（try_files $uri /index.html）、HTTPS 证书。Docker：多阶段构建（node 阶段构建 → nginx 阶段运行）、镜像分层与最小化、配合编排做滚动更新。SSR 应用则需要 Node 进程常驻。",
+          "lv": "中等"
+        },
+        {
+          "q": "如何设计前端缓存策略与版本发布（灰度、回滚）？",
+          "a": "缓存策略：index.html 设 no-cache（每次校验）、静态资源用 hash 文件名 + max-age 长缓存 + immutable；CDN 分层缓存与刷新预热。发布：构建产物不可变、保留旧版本可回滚、灰度按用户比例/地域/设备、灰度期间监控错误率与 Web Vitals、异常时一键切回旧版本。",
+          "lv": "中等"
+        },
+        {
+          "q": "微前端有哪些实现方案？适用场景与代价是什么？",
+          "a": "方案：iframe（隔离最强、通信靠 postMessage，体验与 SEO 差）、qiankun 类（JS 沙箱 + 样式隔离，应用级接入）、Module Federation（构建期共享依赖，需发版协同）、Web Components（原生标准，兼容性需评估）。适用：多团队巨型系统、存量系统整合、跨业务线独立发布。代价：路由与通信、样式隔离、依赖共享、部署与版本治理。",
+          "lv": "中等"
+        },
+        {
+          "q": "BFF 与 API 网关如何配合？前端直连后端有什么风险？",
+          "a": "网关统一做路由、鉴权、限流、灰度、日志；BFF 面向前端做视图聚合与字段裁剪，可按端拆分。直连风险：暴露后端拓扑与内部协议、传输冗余字段导致体积变大、多端多请求往返、CORS 复杂、版本不一致、无法针对端定制与缓存。",
+          "lv": "中等"
+        },
+        {
+          "q": "前端如何做灰度发布、A/B 实验与特性开关（feature flag）？",
+          "a": "flag 从服务端配置下发（按用户 ID/百分比/分组），前端启动时拉取并缓存，运行时按 flag 切换实现路径；曝光与转化需打点归因，保证分流一致（同用户固定分组）。flag 要有默认值、降级策略与生命周期管理（过期清理），避免长期堆积形成技术债。",
+          "lv": "中等"
+        },
+        {
+          "q": "大型前端应用如何做架构分层与模块治理？",
+          "a": "分层：应用层（路由、布局、权限）、编排层（业务流程）、领域层（业务模块）、公共层（UI 组件、hooks、utils、请求层）；依赖方向单一、禁止循环依赖（用 ESLint import 规则守护）。治理：模块边界与 CODEOWNERS、公共包版本策略、渐进式重构（绞杀者模式 strangler）、架构决策记录（ADR）。",
+          "lv": "困难"
+        }
+      ]
+    }
+  ]
+}
